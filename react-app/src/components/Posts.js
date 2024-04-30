@@ -6,11 +6,14 @@ import {
   IconButton,
   Separator,
   Text,
+  TextField,
 } from "@radix-ui/themes"
 
-import { CopyIcon } from "@radix-ui/react-icons"
+import { CopyIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons"
 
 import moment from "moment"
+
+import { useState, useEffect } from "react"
 
 function unixTimeToDateTime(unixTimestamp) {
   const date = moment.unix(Number(unixTimestamp))
@@ -18,11 +21,35 @@ function unixTimeToDateTime(unixTimestamp) {
 }
 
 const Posts = ({ posts }) => {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchedPosts, setSearchedPosts] = useState([])
+
+  useEffect(() => {
+    let filtered = posts.filter((post) =>
+      post.text
+        .concat(post.senderAddress)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    )
+    setSearchedPosts(filtered)
+  }, [posts, searchQuery])
+
   return (
     <div>
       <Heading mt="5">Posts</Heading>
-      {posts.map((post) => (
-        <Card mt="5">
+      <TextField.Root
+        mb="2"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        mt="2"
+        placeholder="Search by text or address"
+      >
+        <TextField.Slot>
+          <MagnifyingGlassIcon height="16" width="16" />
+        </TextField.Slot>
+      </TextField.Root>
+      {searchedPosts.map((post) => (
+        <Card mt="2">
           <Flex justify="between">
             <Text>
               <Flex align="center" gap="3">
