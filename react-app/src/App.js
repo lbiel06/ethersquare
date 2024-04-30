@@ -44,7 +44,7 @@ function App() {
           account={connectedAccount}
           refresh={getPosts}
         ></NewPostForm>
-        <Posts posts={posts}></Posts>
+        <Posts posts={posts} refresh={getPosts}></Posts>
       </Container>
     </Theme>
   )

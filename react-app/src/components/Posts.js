@@ -9,7 +9,11 @@ import {
   TextField,
 } from "@radix-ui/themes"
 
-import { CopyIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons"
+import {
+  CopyIcon,
+  MagnifyingGlassIcon,
+  UpdateIcon,
+} from "@radix-ui/react-icons"
 
 import moment from "moment"
 
@@ -20,7 +24,7 @@ function unixTimeToDateTime(unixTimestamp) {
   return date.format("DD.MM.YYYY HH:mm")
 }
 
-const Posts = ({ posts }) => {
+const Posts = ({ posts, refresh }) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [searchedPosts, setSearchedPosts] = useState([])
 
@@ -36,7 +40,21 @@ const Posts = ({ posts }) => {
 
   return (
     <div>
-      <Heading mt="5">Posts</Heading>
+      <Heading mt="5">
+        Posts
+        <IconButton
+          ml="3"
+          mt="2"
+          size="3"
+          aria-label="Copy value"
+          color="gray"
+          variant="ghost"
+          onClick={refresh}
+        >
+          <UpdateIcon />
+        </IconButton>
+      </Heading>
+
       <TextField.Root
         mb="2"
         value={searchQuery}
