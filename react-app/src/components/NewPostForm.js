@@ -16,12 +16,16 @@ const NewPostForm = ({ account, refresh }) => {
   const [newPostValue, setNewPostValue] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  async function addPostHandler() {
+  const addPostHandler = async () => {
     setLoading(true)
-    await EthersquareContract.methods.addPost(newPostText).send({
-      from: account,
-      value: newPostValue,
-    })
+    try {
+      await EthersquareContract.methods.addPost(newPostText).send({
+        from: account,
+        value: newPostValue,
+      })
+    } catch {
+      alert("Could not add post")
+    }
     setLoading(false)
     refresh()
     setNewPostText("")

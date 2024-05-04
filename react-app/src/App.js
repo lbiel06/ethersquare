@@ -12,18 +12,18 @@ function App() {
   const [connectedAccount, setConnectedAccount] = useState("")
   const [posts, setPosts] = useState([])
 
-  async function connectWallet() {
+  const connectWallet = async () => {
     if (window.ethereum) {
       await window.ethereum.request({ method: "eth_requestAccounts" })
       const accounts = await web3.eth.getAccounts()
       setConnectedAccount(accounts[0])
-      console.log(accounts[0])
+      // console.log(accounts[0])
     } else {
       alert("Could not connect to the wallet")
     }
   }
 
-  async function getPosts() {
+  const getPosts = async () => {
     let posts = await EthersquareContract.methods.getPosts().call()
     setPosts(posts)
     // console.log(posts)
