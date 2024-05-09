@@ -29,6 +29,7 @@ const NewPostForm = ({ account, refresh }) => {
     setLoading(false)
     refresh()
     setNewPostText("")
+    setNewPostValue(0)
   }
   return (
     <div>
