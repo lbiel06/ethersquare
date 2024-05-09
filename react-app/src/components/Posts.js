@@ -68,29 +68,27 @@ const Posts = ({ posts, refresh }) => {
       </TextField.Root>
       {searchedPosts.map((post) => (
         <Card mt="2">
-          <Flex justify="between">
-            <Text>
-              <Flex align="center" gap="3">
-                <Text color="gray">
-                  {unixTimeToDateTime(post.blockTimestamp)}
-                </Text>
+          <Flex justify="between" style={{ flexWrap: "wrap" }} gap="3">
+            <Flex align="center" gap="3" style={{ flexWrap: "wrap" }}>
+              <Text color="gray">
+                {unixTimeToDateTime(post.blockTimestamp)}
+              </Text>
 
-                <Text color="gray" weight="bold">
-                  {post.senderAddress}
-                </Text>
-                <IconButton
-                  size="1"
-                  aria-label="Copy value"
-                  color="gray"
-                  variant="ghost"
-                  onClick={() =>
-                    navigator.clipboard.writeText(post.senderAddress)
-                  }
-                >
-                  <CopyIcon />
-                </IconButton>
-              </Flex>
-            </Text>
+              <Text color="gray" weight="bold">
+                {post.senderAddress}
+              </Text>
+              <IconButton
+                size="1"
+                aria-label="Copy value"
+                color="gray"
+                variant="ghost"
+                onClick={() =>
+                  navigator.clipboard.writeText(post.senderAddress)
+                }
+              >
+                <CopyIcon />
+              </IconButton>
+            </Flex>
             <Badge color={post.transactionValue ? "green" : "gray"}>
               {Number(post.transactionValue)} Wei
             </Badge>
