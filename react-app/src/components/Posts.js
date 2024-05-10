@@ -82,9 +82,10 @@ const Posts = ({ posts, refresh }) => {
                 aria-label="Copy value"
                 color="gray"
                 variant="ghost"
-                onClick={() =>
+                onClick={() => {
                   navigator.clipboard.writeText(post.senderAddress)
-                }
+                  alert("Copied to clipboard")
+                }}
               >
                 <CopyIcon />
               </IconButton>
